@@ -10,9 +10,6 @@ export default function StatusCard({
     icon,
     title,
     amount,
-    percentage,
-    percentageColor,
-    percentageIcon,
     date,
 }) {
     return (
@@ -27,11 +24,9 @@ export default function StatusCard({
                 </CardRow>
 
                 <CardStatusFooter
-                    amount={percentage}
-                    color={percentageColor}
                     date={date}
                 >
-                    <Icon color={percentageColor} name={percentageIcon} />
+                    <Icon  />
                 </CardStatusFooter>
             </Card>
         </div>

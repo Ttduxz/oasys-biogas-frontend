@@ -1471,6 +1471,7 @@ video {
 .h-4{height:1rem}
 .h-px{height:1px}
 .h-2{height:0.5rem}
+.h-3{height: 0.75rem}
 .w-full{width:100%}
 .w-40{width:10rem}
 .w-72{width:18rem}
@@ -2474,17 +2475,44 @@ video {
 	}
 }
 @media (min-width: 1280px){
+	.xl\:col-end-2{
+		grid-column-end: 2;
+	}
+	.xl\:col-end-3{
+		grid-column-end: 3;
+	}
 	.xl\:col-end-4{
 		grid-column-end: 4;
+	}
+	.xl\:col-end-5{
+		grid-column-end: 5;
 	}
 	.xl\:col-end-6{
 		grid-column-end: 6;
 	}
+	.xl\:col-end-7{
+		grid-column-end: 7;
+	}
 	.xl\:col-start-1{
 		grid-column-start: 1;
 	}
+	.xl\:col-start-2{
+		grid-column-start: 2;
+	}
+	.xl\:col-start-3{
+		grid-column-start: 3;
+	}
 	.xl\:col-start-4{
 		grid-column-start: 4;
+	}
+	.xl\:col-start-5{
+		grid-column-start: 5;
+	}
+	.xl\:col-start-6{
+		grid-column-start: 6;
+	}
+	.xl\:grid-cols-6{
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 	}
 	.xl\:grid-cols-5{
 		grid-template-columns: repeat(5, minmax(0, 1fr));

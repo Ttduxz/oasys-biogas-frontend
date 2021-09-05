@@ -10,28 +10,21 @@ export default function ChartLine() {
             type: 'line',
             data: {
                 labels: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
+                    '1st hour',
+                    '2nd hour',
+                    '3rd hour',
+                    '4th hour',
+                    '5th hour',
+                    '6th hour',
+                    '7th hour',
                 ],
                 datasets: [
                     {
                         label: new Date().getFullYear(),
                         backgroundColor: '#03a9f4',
                         borderColor: '#03a9f4',
-                        data: [65, 78, 66, 44, 56, 67, 75],
+                        data: [250, 253, 247, 252, 250, 244, 252],
                         fill: false,
-                    },
-                    {
-                        label: new Date().getFullYear() - 1,
-                        fill: false,
-                        backgroundColor: '#ff9800',
-                        borderColor: '#ff9800',
-                        data: [40, 68, 86, 74, 56, 60, 87],
                     },
                 ],
             },
@@ -40,7 +33,7 @@ export default function ChartLine() {
                 responsive: true,
                 title: {
                     display: false,
-                    text: 'Sales Charts',
+                    text: 'Pressure',
                     fontColor: 'white',
                 },
                 legend: {
@@ -67,7 +60,7 @@ export default function ChartLine() {
                             display: true,
                             scaleLabel: {
                                 display: false,
-                                labelString: 'Month',
+                                labelString: 'Hour',
                                 fontColor: 'white',
                             },
                             gridLines: {
@@ -113,10 +106,10 @@ export default function ChartLine() {
     return (
         <Card>
             <CardHeader color="orange" contentPosition="left">
-                <h6 className="uppercase text-gray-200 text-xs font-medium">
+                {/* <h6 className="uppercase text-gray-200 text-xs font-medium">
                     Overview
-                </h6>
-                <h2 className="text-white text-2xl">Sales value</h2>
+                </h6> */}
+                <h2 className="text-white text-2xl">Pressure</h2>
             </CardHeader>
             <CardBody>
                 <div className="relative h-96">
