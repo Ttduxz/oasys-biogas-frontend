@@ -10,7 +10,6 @@ export default function StatusCard({
     icon,
     title,
     amount,
-    date,
 }) {
     return (
         <div className="px-4 mb-10">
@@ -23,11 +22,10 @@ export default function StatusCard({
                     <CardStatus title={title} amount={amount} />
                 </CardRow>
 
-                <CardStatusFooter
-                    date={date}
+                {/* <CardStatusFooter
                 >
                     <Icon  />
-                </CardStatusFooter>
+                </CardStatusFooter> */}
             </Card>
         </div>
     );
