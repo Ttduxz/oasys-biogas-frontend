@@ -15,7 +15,7 @@ export default function Picture({
                 </div>
             </CardHeader>
             <CardBody>
-                <img src={"https://firebasestorage.googleapis.com/v0/b/biogas-2f0c0.appspot.com/o/show.jpg?alt=media&token=124b280b-e139-442d-8176-aa1e2108c099"} alt="Picture of the author"> </img>
+                
             </CardBody>
         </Card>
     );
