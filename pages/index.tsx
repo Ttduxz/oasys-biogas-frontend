@@ -71,7 +71,7 @@ export default class Home extends React.Component {
             <Dashboard
             data={this.state.data}
             station={this.state.data[0].ID}
-            date={this.state.data[0].ServerTime}
+            date={this.state.data[0].TimeStamp}
             temp={this.state.data[0].Temp}
             humi={this.state.data[0].Humi}
             pa={this.state.data[0].MPXV}
