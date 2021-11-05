@@ -24,7 +24,7 @@ export default function ChartLine() {
                         backgroundColor: '#03a9f4',
                         borderColor: '#03a9f4',
                         data: [250, 253, 247, 252, 250, 244, 252],
-                        fill: false,
+                        fill: true,
                     },
                 ],
             },

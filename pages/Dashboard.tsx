@@ -15,14 +15,14 @@ export default function Dashboard({
     let pa_int = Number(pa)
     let percent = ((pa_int/497.68)*100).toFixed(1)
     return (
-        <>
+        <div className="h-full w-full" >
             <div className="bg-light-blue-500 px-3 md:px-8 h-20 self-center">
                 <p className="pt-6 text-center text-4xl md:text-4xl text-white">
                     Station {station}
                 </p>
             </div>
 
-            <div className="px-3 mt-10 md:px-8 -mt-13">
+            <div className="px-3 pt-6 mt-12 md:px-8 -mt-13">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 xl:grid-cols-6">
                         <div className="xl:col-start-1 xl:col-end-3 px-4 mb-14">
@@ -38,9 +38,9 @@ export default function Dashboard({
                 </div>
             </div>
 
-            <div className="px-3  mt-6 mb-32 md:px-8">
+            <div className="px-3  pt-3 mt-6 mb-16 md:px-8">
                 <div className="container mx-auto max-w-full">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 mb-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
                         <StatusCard
                             color="pink"
                             icon="Temp"
@@ -68,6 +68,6 @@ export default function Dashboard({
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

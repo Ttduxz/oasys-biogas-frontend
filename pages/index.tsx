@@ -1,16 +1,29 @@
 import Dashboard from "./Dashboard"
-import { Schema, model, connect } from 'mongoose';
 import { useEffect, useState } from "react";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios"
 
 interface Data {
   ID: string;
-  TimeStamp: string;
+  TimeStamp: Date;
   Temp:number;
   Humi:number;
   MPXV:number;
   DFRo:number;
   ServerTime:Date;
 }
+
+const getUser = async () => {
+  try {
+    const response = await axios.get('https://bio-gas.vercel.app/bio-gas')
+    console.log("response: ", response)
+    // do something about response
+  } catch (error) {
+    console.log('Request canceled', error.message);
+    axios.isCancel(error)
+  }
+}
+
+getUser()
 
 const Home = () => {
   const [showChild, setShowChild] = useState(false);
@@ -30,15 +43,7 @@ const Home = () => {
         date="Since 16-03-2021 23:48:35"
         temp="26.91"
         humi="38.5"
-        pa="252"
-      />
-
-      <Dashboard
-        station="02"
-        date="Since 16-03-2021 23:48:35"
-        temp="26.91"
-        humi="38.5"
-        pa="252"
+        pa="300"
       />
     </>
   )
