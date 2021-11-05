@@ -1,7 +1,7 @@
 import StatusCard from '../components/StatusCard';
 import ChartLine from '../components/ChartLine';
 // import ChartBar from '../components/ChartBar';
-// import Picture from '../components/Picture'
+
 import Guage from '../components/Guage'
 
 export default function Dashboard({
@@ -10,10 +10,19 @@ export default function Dashboard({
     temp,
     humi,
     pa,
+    data
 
 }) {
     let pa_int = Number(pa)
+    let humi_int = Number(humi).toFixed(1)
+    let temp_int = Number(temp).toFixed(1)
+    temp = temp_int.toString()
+    humi = humi_int.toString()
+    
+    if (pa_int <= 0) pa_int = 0
     let percent = ((pa_int/497.68)*100).toFixed(1)
+    pa = pa_int.toString()
+
     return (
         <div className="h-full w-full" >
             <div className="bg-light-blue-500 px-3 md:px-8 h-20 self-center">
@@ -29,11 +38,8 @@ export default function Dashboard({
                             <Guage date={date} percent={percent}/>
                         </div>
                         <div className="xl:col-start-3 xl:col-end-7 px-5 mb-14">
-                            <ChartLine/>
+                            <ChartLine data={data}/>
                         </div>
-                        {/* <div className="xl:col-start-5 xl:col-end-7 px-4 mb-14">
-                            <Picture/>
-                        </div> */}
                     </div>
                 </div>
             </div>

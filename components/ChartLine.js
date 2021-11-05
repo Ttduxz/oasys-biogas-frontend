@@ -4,26 +4,36 @@ import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 
-export default function ChartLine() {
+export default function ChartLine({
+    data
+}) {
+    let mpxv_all = []
+    let time = []
+    for (let i = 0; i<200; i++) {
+        if (data[i].ID == 2) {
+            if (data[i].MPXV <= 0 ) {
+                mpxv_all.push(0)
+            }
+            else mpxv_all.push(data[i].MPXV)
+            time.push(data[i].TimeStamp)
+        }
+        else continue   
+    }
+    // console.log(mpxv_all)
+
     useEffect(() => {
         var config = {
             type: 'line',
             data: {
-                labels: [
-                    '1st hour',
-                    '2nd hour',
-                    '3rd hour',
-                    '4th hour',
-                    '5th hour',
-                    '6th hour',
-                    '7th hour',
-                ],
+                labels: time.reverse(),
+                legend: {
+                    display: true
+                 },
                 datasets: [
                     {
-                        label: new Date().getFullYear(),
                         backgroundColor: '#03a9f4',
                         borderColor: '#03a9f4',
-                        data: [250, 253, 247, 252, 250, 244, 252],
+                        data: mpxv_all.reverse(),
                         fill: true,
                     },
                 ],
