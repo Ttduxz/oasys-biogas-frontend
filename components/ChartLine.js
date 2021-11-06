@@ -10,7 +10,7 @@ export default function ChartLine({
     let mpxv_all = []
     let time = []
     for (let i in data) {
-        if (data[i].ID == 2) {
+        if (data[i].ID == 1) {
             if (data[i].MPXV <= 0 ) {
                 mpxv_all.push(0)
             }

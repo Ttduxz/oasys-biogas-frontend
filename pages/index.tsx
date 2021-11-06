@@ -6,7 +6,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
 interface Data {
-  ID: string;
+  ID: number;
   TimeStamp: Date;
   Temp:string;
   Humi:string;
@@ -24,17 +24,20 @@ export default class Home extends React.Component {
     data: []
   }
 
+  state2:State = {
+    data: []
+  }
+
   test = {
     url:""
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     
-    axios.get('https://bio-gas.vercel.app/bio-gas')
+    await axios.get('https://bio-gas.vercel.app/bio-gas')
       .then(res => {
         const data = res.data
         this.setState({ data })
-        console.log(this.state.data['MPXV'])
       })
 
     const firebaseConfig = {
@@ -58,6 +61,14 @@ export default class Home extends React.Component {
   }
 
   render() {
+
+    for (let i in this.state.data) {
+      if (this.state.data[i].ID == 1) {
+        this.state2.data.push(this.state.data[i])
+      }
+      else continue
+    }
+    
     return  ( 
       <>
         {
@@ -70,11 +81,11 @@ export default class Home extends React.Component {
             </div> */}
             <Dashboard
             data={this.state.data}
-            station={this.state.data[0].ID}
-            date={this.state.data[0].TimeStamp}
-            temp={this.state.data[0].Temp}
-            humi={this.state.data[0].Humi}
-            pa={this.state.data[0].MPXV}
+            station={this.state2.data[0].ID}
+            date={this.state2.data[0].TimeStamp}
+            temp={this.state2.data[0].Temp}
+            humi={this.state2.data[0].Humi}
+            pa={this.state2.data[0].MPXV}
             />
           </>) : null
         }
