@@ -3,6 +3,7 @@ import Chart from 'chart.js';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 export default function ChartLine({
     data
@@ -39,6 +40,19 @@ export default function ChartLine({
                 ],
             },
             options: {
+                plugins: {
+                    zoom: {
+                      zoom: {
+                        wheel: {
+                          enabled: true,
+                        },
+                        pinch: {
+                          enabled: true
+                        },
+                        mode: 'xy',
+                      }
+                    }
+                  },
                 maintainAspectRatio: false,
                 responsive: true,
                 title: {
@@ -111,6 +125,7 @@ export default function ChartLine({
         };
         var ctx = document.getElementById('line-chart').getContext('2d');
         window.myLine = new Chart(ctx, config);
+        Chart.register(zoomPlugin);
     }, []);
 
     return (
