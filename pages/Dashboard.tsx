@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 import Guage from '../components/Guage'
 
-const ChartLine = dynamic(() => import("../components/ChartLine"),{ssr:true})
+const ChartLine = dynamic(() => import("../components/ChartLine"),{ssr:false})
 
 export default function Dashboard({
     station,

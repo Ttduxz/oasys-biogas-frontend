@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Chart from 'chart.js';
+import {Chart, registerables } from 'chart.js';
 import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
@@ -49,7 +49,7 @@ export default function ChartLine({
                         pinch: {
                           enabled: true
                         },
-                        mode: 'xy',
+                        mode: 'x',
                       }
                     }
                   },
@@ -123,9 +123,10 @@ export default function ChartLine({
                 },
             },
         };
+        Chart.register(...registerables)
+        Chart.register(zoomPlugin);
         var ctx = document.getElementById('line-chart').getContext('2d');
         window.myLine = new Chart(ctx, config);
-        Chart.register(zoomPlugin);
     }, []);
 
     return (
