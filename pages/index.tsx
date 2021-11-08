@@ -17,18 +17,17 @@ interface Data {
 
 interface State {
   data: Data[]
+  url:string
 }
 
 export default class Home extends React.Component {
   state:State = {
-    data: []
+    data: [],
+    url: ""
   }
 
   state2:State = {
-    data: []
-  }
-
-  test = {
+    data: [],
     url:""
   }
 
@@ -54,14 +53,13 @@ export default class Home extends React.Component {
     const app = initializeApp(firebaseConfig);
 
     const storage = getStorage();
-    getDownloadURL(ref(storage, 'show.jpg'))
+    await getDownloadURL(ref(storage, 'show.jpg'))
       .then((res) => {
-        this.test.url = res
+        this.setState({url:res})
       });
   }
 
   render() {
-
     for (let i in this.state.data) {
       if (this.state.data[i].ID == 1) {
         this.state2.data.push(this.state.data[i])
@@ -74,11 +72,12 @@ export default class Home extends React.Component {
         {
           this.state.data[0] ? (
           <>
-            {/* <div className="grid grid-cols-1 xl:grid-cols-6">    
-              <div className="xl:col-start-1 xl:col-end-3 px-4 mb-14">
-                <Picture url={this.test.url}/>
+            <div className="grid grid-cols-1 xl:grid-cols-6">    
+              <div className="xl:col-start-2 xl:col-end-6 px-4 mb-14">
+                <Picture url={this.state.url}/>
               </div>
-            </div> */}
+            </div>
+
             <Dashboard
             data={this.state.data}
             station={this.state2.data[0].ID}
