@@ -10,15 +10,11 @@ export default function ChartLine({
 }) {
     let mpxv_all = []
     let dateTime = []
-    let time = []
-    let sum = 0
-    let count = 0
-    let result = []
-    let data_week
-    let date = []
-    let week = []
-    let mpxv_week = []
-
+    let data_day = []
+    let time_day = []
+    let data_week = []
+    let time_week = []
+    // day 288 week 2016
     for (let i in data) {
         if (data[i].ID == 1) {
             if (data[i].MPXV <= 0 ) {
@@ -30,44 +26,23 @@ export default function ChartLine({
         else continue   
     }
 
-    for (let i in dateTime) {
-        time.push(dateTime[i].split(" "))
-        date.push(time[i][0])
+    for(let i = 0;i<287;i++){
+        data_day.push(mpxv_all[i])
+        time_day.push(dateTime[i])
     }
-    
-    data_week = new Set(date)
-    data_week = Array.from(data_week)
-    
+
+    for(let i = 0;i<2015;i++){
+        data_week.push(mpxv_all[i])
+        time_week.push(dateTime[i])
+    }
 
     console.log(data_week)
-    // console.log(data)
-    
-    //จัดการเรื่องของวัน
-    for (let i in time+1) {
-        if (i == 0) {
-            sum = mpxv_all[0]
-            count ++
-            continue
-        }
-        if (date[i] !== date[i-1]) {
-            result.push(sum/count)
-            sum = 0
-            count = 0
-        }
-        sum += mpxv_all[i]
-        count++
-    }
-
-    for(let i=0; i<7;i++){
-        week[i] = data_week[i]
-        mpxv_week[i] = result[i]
-    }
-    console.log(week)
-    console.log(mpxv_week)
-
+    console.log(time_week)
     useEffect(() => {
-        week.reverse()
-        mpxv_week.reverse()
+        data_week.reverse()
+        time_week.reverse()
+        data_day.reverse()
+        time_day.reverse()
         var config = {
             type: 'line',
             data: {
@@ -99,7 +74,7 @@ export default function ChartLine({
                       }
                     }
                   },
-                tension: 0.3  ,
+                tension: 0 ,
                 maintainAspectRatio: false,
                 responsive: true,
                 title: {
@@ -150,19 +125,36 @@ export default function ChartLine({
         Chart.register(...registerables)
         Chart.register(zoomPlugin);
         var ctx = document.getElementById('line-chart').getContext('2d');
+
         const tricker = document.getElementById('tricker')
         tricker.addEventListener('change',dateTricker)
+        
+        const rest = document.getElementById('button')
+        rest.addEventListener('click',resetZoomChart)
+
         function dateTricker() {
             if(tricker.value === 'all'){
                 myLine.data.datasets[0].data = mpxv_all
                 myLine.data.labels = dateTime
+                myLine.resetZoom()
                 myLine.update()
             }
             if(tricker.value === 'week'){
-                myLine.data.datasets[0].data = mpxv_week,
-                myLine.data.labels = week
+                myLine.data.datasets[0].data = data_week,
+                myLine.data.labels = time_week
+                myLine.resetZoom()
                 myLine.update()
             }
+            if(tricker.value === 'day'){
+                myLine.data.datasets[0].data = data_day,
+                myLine.data.labels = time_day
+                myLine.resetZoom()
+                myLine.update()
+            }
+        }
+
+        function resetZoomChart(){
+            myLine.resetZoom()
         }
         window.myLine = new Chart(ctx, config);
     }, []);
@@ -176,11 +168,17 @@ export default function ChartLine({
                 <h2 className="text-white text-2xl">Pressure</h2>
             </CardHeader>
             <CardBody>
-                <div>
-                    <select id="tricker">
-                        <option value='all'>All</option>
-                        <option value='week'>Week</option>
-                    </select>
+                <div className="flex">
+                    <div>
+                        <select id="tricker">
+                            <option value='all'>All</option>
+                            <option value='day'>Day</option>
+                            <option value='week'>Week</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="button">Reset</button>
+                    </div>
                 </div>
                 <div className="relative h-96">
                     <canvas id="line-chart"></canvas>
