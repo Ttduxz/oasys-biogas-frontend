@@ -13,7 +13,8 @@ export default function Dashboard({
     temp,
     humi,
     pa,
-    data
+    data,
+    data2
 
 }) {
     let pa_int = Number(pa)
@@ -23,7 +24,7 @@ export default function Dashboard({
     humi = humi_int.toString()
     
     if (pa_int <= 0) pa_int = 0
-    let percent = ((pa_int/497.68)*100).toFixed(1)
+    let percent = ((pa_int/350)*100).toFixed(1)
     pa = pa_int.toString()
 
     return (
@@ -53,26 +54,32 @@ export default function Dashboard({
                         <StatusCard
                             color="pink"
                             icon="Temp"
-                            title="°C"
-                            amount={temp}
+                            title=""
+                            amount={temp + " °C"}
                         />
                         <StatusCard
                             color="orange"
                             icon="Humi"
-                            title="%"
-                            amount={humi}
+                            title=""
+                            amount={humi + " %"}
                         />
                         <StatusCard
                             color="purple"
                             icon="PA" 
-                            title="Pa"
-                            amount={pa}
+                            title=""
+                            amount={pa + " Pa"}
                         />
                          <StatusCard
-                            color="purple"
-                            icon="V" 
-                            title="Volume"
-                            amount={pa}
+                            color="red"
+                            icon="Vol" 
+                            title=""
+                            amount={pa + " m³"}
+                        />
+                        <StatusCard
+                            color="gray"
+                            icon="Flow" 
+                            title={data2[0].time_date}
+                            amount={data2[0].total + " m³"}
                         />
                     </div>
                 </div>

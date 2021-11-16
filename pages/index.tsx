@@ -15,8 +15,16 @@ interface Data {
   ServerTime:Date;
 }
 
+interface Data2 {
+  tbl_id: string;
+  time_date: string;
+  flow:string;
+  total:string;
+}
+
 interface State {
   data: Data[]
+  data2: Data2[]
   image: {
     url:string,
     timestamp:string
@@ -26,6 +34,7 @@ interface State {
 export default class Home extends React.Component {
   state:State = {
     data: [],
+    data2: [],
     image: {
       url:"",
       timestamp:""
@@ -34,6 +43,7 @@ export default class Home extends React.Component {
 
   state2:State = {
     data: [],
+    data2: [],
     image: {
       url:"",
       timestamp:""
@@ -41,6 +51,15 @@ export default class Home extends React.Component {
   }
 
   async componentDidMount() {
+
+    await axios.get('http://www.chiangraibiogas.com/fetchData.php?fbclid=IwAR2-sqeW6gGYMnWCMQ3R7uNq_gNP51eXk3GPEJP-_rLpTDtBiLfYteHuEZk')
+      .then(res => {
+        const data = res.data
+        this.setState({ 
+          data2: data
+        })
+      })
+
     
     await axios.get('https://bio-gas.vercel.app/bio-gas')
       .then(res => {
@@ -93,13 +112,9 @@ export default class Home extends React.Component {
         {
           this.state.data[0] ? (
           <>
-            <div className="grid grid-cols-1 xl:grid-cols-6">    
-              <div className="xl:col-start-2 xl:col-end-6 px-4 mb-14">
-                <Picture url={this.state.image.url} timestamp={this.state.image.timestamp}/>
-              </div>
-            </div>
 
             <Dashboard
+            data2={this.state.data2}
             data={this.state.data}
             station={this.state2.data[0].ID}
             date={this.state2.data[0].TimeStamp}
@@ -107,6 +122,11 @@ export default class Home extends React.Component {
             humi={this.state2.data[0].Humi}
             pa={this.state2.data[0].MPXV}
             />
+            <div className="grid grid-cols-1 xl:grid-cols-6">    
+              <div className="xl:col-start-2 xl:col-end-6 px-4 mb-14">
+                <Picture url={this.state.image.url} timestamp={this.state.image.timestamp}/>
+              </div>
+            </div>
           </>) : null
         }
       </> 

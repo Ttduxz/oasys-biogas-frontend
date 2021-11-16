@@ -6,8 +6,6 @@ export default function Picture({
     url,
     timestamp
 }) {
-    console.log(url)
-    console.log(timestamp)
     return (
         <Card>
             <CardHeader color="blue" contentPosition="none">
