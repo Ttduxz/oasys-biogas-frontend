@@ -63,14 +63,26 @@ export default function ChartLine({
             options: {
                 plugins: {
                     zoom: {
-                      zoom: {
-                        wheel: {
-                          enabled: true,
+                        pan: {
+                            enabled: true,
+                            mode: 'x',
+                            threshold: 20,
                         },
-                        pinch: {
-                          enabled: true
-                        },
-                        mode: 'x',
+                        zoom: {
+                            wheel: {
+                                enabled: true,
+                            },
+                            pinch: {
+                                enabled: true
+                            },
+                            mode: 'x',
+                            drag: {
+                                enabled: false,
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                threshold: 100
+                            }
                       }
                     }
                   },
@@ -177,7 +189,7 @@ export default function ChartLine({
                         </select>
                     </div>
                     <div>
-                        <button id="button">Reset</button>
+                        <button id="button" className="ml-2">Reset</button>
                     </div>
                 </div>
                 <div className="relative h-96">
