@@ -36,8 +36,6 @@ export default function ChartLine({
         time_week.push(dateTime[i])
     }
 
-    console.log(data_week)
-    console.log(time_week)
     useEffect(() => {
         data_week.reverse()
         time_week.reverse()

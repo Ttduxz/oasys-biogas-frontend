@@ -3,13 +3,17 @@ import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 
 export default function Picture({
-    url
+    url,
+    timestamp
 }) {
+    console.log(url)
+    console.log(timestamp)
     return (
         <Card>
             <CardHeader color="blue" contentPosition="none">
                 <div className="w-full flex items-center justify-between">
                     <h2 className="text-white text-2xl">Mae Wang Camera</h2>
+                    <p>{timestamp}</p>
                 </div>
             </CardHeader>
             <CardBody className="flex justify-center mb-2">

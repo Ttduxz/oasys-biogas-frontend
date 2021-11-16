@@ -2,7 +2,7 @@ import Dashboard from "./Dashboard"
 import axios from "axios"
 import React from "react";
 import Picture from '../components/Picture'
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, getMetadata } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
 interface Data {
@@ -17,18 +17,27 @@ interface Data {
 
 interface State {
   data: Data[]
-  url:string
+  image: {
+    url:string,
+    timestamp:string
+  }
 }
 
 export default class Home extends React.Component {
   state:State = {
     data: [],
-    url: ""
+    image: {
+      url:"",
+      timestamp:""
+    }
   }
 
   state2:State = {
     data: [],
-    url:""
+    image: {
+      url:"",
+      timestamp:""
+    }
   }
 
   async componentDidMount() {
@@ -51,12 +60,24 @@ export default class Home extends React.Component {
     
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-
     const storage = getStorage();
-    await getDownloadURL(ref(storage, 'show.jpg'))
+    const forestRef = ref(storage, 'show.jpg')
+    await getDownloadURL(forestRef)
       .then((res) => {
-        this.setState({url:res})
-      });
+        this.setState({image:{url:res}})
+      })
+      
+    await getMetadata(forestRef)
+    .then((metadata) => {
+      let a = new Date(metadata.timeCreated)
+      let b = a.getFullYear() + "-" + a.getMonth() + "-" + a.getDate() + " " + a.toTimeString()
+      let c = b.split(" ")
+      b = c[0] + " " + c[1]
+      this.setState({image:{
+        url: this.state.image.url,
+        timestamp: b
+      }})
+    })
   }
 
   render() {
@@ -74,7 +95,7 @@ export default class Home extends React.Component {
           <>
             <div className="grid grid-cols-1 xl:grid-cols-6">    
               <div className="xl:col-start-2 xl:col-end-6 px-4 mb-14">
-                <Picture url={this.state.url}/>
+                <Picture url={this.state.image.url} timestamp={this.state.image.timestamp}/>
               </div>
             </div>
 
