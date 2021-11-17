@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     mode: 'jit',
     purge: [
@@ -14,7 +16,11 @@ module.exports = {
             serif: ['"Roboto Slab"', 'serif'],
             body: ['Roboto', 'sans-serif'],
         },
-        extend: {},
+        extend: {
+            colors: {
+                'regal-blue': '#243c5a',
+              }
+        },
     },
     variants: {
         extend: {},

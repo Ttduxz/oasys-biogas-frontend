@@ -14,7 +14,8 @@ export default function Dashboard({
     humi,
     pa,
     data,
-    data2
+    flow,
+    time,
 
 }) {
     let pa_int = Number(pa)
@@ -76,10 +77,10 @@ export default function Dashboard({
                             amount={pa + " m³"}
                         />
                         <StatusCard
-                            color="gray"
+                            color="aut1"
                             icon="Flow" 
-                            title={data2[0].time_date}
-                            amount={data2[0].total + " m³"}
+                            title={time}
+                            amount={flow + " m³"}
                         />
                     </div>
                 </div>

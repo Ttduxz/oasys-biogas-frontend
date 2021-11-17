@@ -114,7 +114,8 @@ export default class Home extends React.Component {
           <>
 
             <Dashboard
-            data2={this.state.data2}
+            flow={this.state.data2[0].total}
+            time={this.state.data2[0].time_date}
             data={this.state.data}
             station={this.state2.data[0].ID}
             date={this.state2.data[0].TimeStamp}
