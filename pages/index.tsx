@@ -52,7 +52,7 @@ export default class Home extends React.Component {
 
   async componentDidMount() {
 
-    await axios.get('http://www.chiangraibiogas.com/fetchData.php?fbclid=IwAR2-sqeW6gGYMnWCMQ3R7uNq_gNP51eXk3GPEJP-_rLpTDtBiLfYteHuEZk')
+    await axios.get('https://bio-gas.vercel.app/bio-gas/chaingrai')
       .then(res => {
         const data = res.data
         this.setState({ 
@@ -97,6 +97,10 @@ export default class Home extends React.Component {
         timestamp: b
       }})
     })
+
+    window.setTimeout(function () {
+      window.location.reload();
+    }, 180000)
   }
 
   render() {
